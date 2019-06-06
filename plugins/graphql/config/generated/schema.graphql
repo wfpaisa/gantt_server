@@ -1,0 +1,354 @@
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input createTaskInput {
+  data: TaskInput
+}
+
+input createTasklinkInput {
+  data: TasklinkInput
+}
+
+type createTasklinkPayload {
+  tasklink: Tasklink
+}
+
+type createTaskPayload {
+  task: Task
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""
+The `DateTime` scalar represents a date and time following the ISO 8601 standard
+"""
+scalar DateTime
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteTaskInput {
+  where: InputID
+}
+
+input deleteTasklinkInput {
+  where: InputID
+}
+
+type deleteTasklinkPayload {
+  tasklink: Tasklink
+}
+
+type deleteTaskPayload {
+  task: Task
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+input editFileInput {
+  name: String
+  hash: String
+  sha256: String
+  ext: String
+  mime: String
+  size: String
+  url: String
+  provider: String
+  public_id: String
+  related: [ID]
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+input editTaskInput {
+  text: String
+  start_date: DateTime
+  duration: Int
+  progress: Float
+  parent: Int
+  sortorder: Int
+  open: Boolean
+  end_date: DateTime
+  type: String
+  render: JSON
+}
+
+input editTasklinkInput {
+  source: Int
+  target: Int
+  type: String
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+}
+
+input FileInput {
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  public_id: String
+  related: [ID]
+}
+
+input InputID {
+  id: ID!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Task | createTaskPayload | updateTaskPayload | deleteTaskPayload | Tasklink | createTasklinkPayload | updateTasklinkPayload | deleteTasklinkPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+
+type Mutation {
+  createTask(input: createTaskInput): createTaskPayload
+  updateTask(input: updateTaskInput): updateTaskPayload
+  deleteTask(input: deleteTaskInput): deleteTaskPayload
+  createTasklink(input: createTasklinkInput): createTasklinkPayload
+  updateTasklink(input: updateTasklinkInput): updateTasklinkPayload
+  deleteTasklink(input: deleteTasklinkInput): deleteTasklinkPayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, source: String, file: Upload!): UploadFile!
+}
+
+type Query {
+  task(id: ID!): Task
+  tasks(sort: String, limit: Int, start: Int, where: JSON): [Task]
+  tasklink(id: ID!): Tasklink
+  tasklinks(sort: String, limit: Int, start: Int, where: JSON): [Tasklink]
+  files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  role(id: ID!): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsRole]
+  user(id: ID!): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+  me: UsersPermissionsMe
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+type Task {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  text: String
+  start_date: DateTime
+  duration: Int
+  progress: Float
+  parent: Int
+  sortorder: Int
+  open: Boolean
+  end_date: DateTime
+  type: String
+  render: JSON
+}
+
+input TaskInput {
+  text: String
+  start_date: DateTime
+  duration: Int
+  progress: Float
+  parent: Int
+  sortorder: Int
+  open: Boolean
+  end_date: DateTime
+  type: String
+  render: JSON
+}
+
+type Tasklink {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  source: Int
+  target: Int
+  type: String
+}
+
+input TasklinkInput {
+  source: Int
+  target: Int
+  type: String
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateTaskInput {
+  where: InputID
+  data: editTaskInput
+}
+
+input updateTasklinkInput {
+  where: InputID
+  data: editTasklinkInput
+}
+
+type updateTasklinkPayload {
+  tasklink: Tasklink
+}
+
+type updateTaskPayload {
+  task: Task
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  public_id: String
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+}
+
+type UsersPermissionsMe {
+  _id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}

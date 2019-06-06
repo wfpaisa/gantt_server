@@ -1,0 +1,45 @@
+{
+  "connection": "default",
+  "collectionName": "tasks",
+  "info": {
+    "name": "task",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "duration": {
+      "type": "integer"
+    },
+    "progress": {
+      "type": "float"
+    },
+    "parent": {
+      "type": "integer"
+    },
+    "sortorder": {
+      "type": "integer"
+    },
+    "open": {
+      "type": "boolean"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "type": {
+      "type": "string"
+    },
+    "render": {
+      "type": "json"
+    }
+  }
+}

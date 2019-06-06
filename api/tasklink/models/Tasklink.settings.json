@@ -1,0 +1,24 @@
+{
+  "connection": "default",
+  "collectionName": "tasklinks",
+  "info": {
+    "name": "tasklink",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "source": {
+      "type": "integer"
+    },
+    "target": {
+      "type": "integer"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

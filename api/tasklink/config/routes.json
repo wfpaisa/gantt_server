@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/tasklinks",
+      "handler": "Tasklink.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tasklinks/count",
+      "handler": "Tasklink.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tasklinks/:id",
+      "handler": "Tasklink.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/tasklinks",
+      "handler": "Tasklink.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/tasklinks/:id",
+      "handler": "Tasklink.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/tasklinks/:id",
+      "handler": "Tasklink.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
